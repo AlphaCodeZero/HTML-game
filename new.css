@@ -1,0 +1,27 @@
+canvas {
+  display: block;
+  border:1px solid #d3d3d3;
+  background-color: #f1f1f1;
+  margin: auto;
+}
+
+.text {
+  width: 480px;
+  height: 270px;
+  border: 1px solid #d3d3d3;
+  background-color: #f1f1f1;
+  text-align: center;
+  margin: auto;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+.text div p {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Arial',sans-serif;
+}
