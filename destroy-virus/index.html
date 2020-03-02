@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html {
+      height: 100%;
+    }
+    body {
+      margin: 0;
+      height: 100%;
+    }
+    #win, #lose, #tips {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: .5;
+      background-color: black;
+      color: white;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    #tips {
+      background-color: transparent;
+      color: black;
+      display: flex;
+      z-index: -1;
+    }
+    .restart {
+      color: black;
+      background-color: white;
+      border: 1px solid white;
+      border-radius: 10px;
+      margin-top: 20px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="win">
+    <span>你赢了</span>
+    <button class="restart">再来一局</button>
+  </div>
+  <div id="lose">
+    <span>你输了</span>
+    <button class="restart">重新开始</button>
+  </div>
+  <div id="tips">
+    滑动黑色小方块以开始游戏
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>
