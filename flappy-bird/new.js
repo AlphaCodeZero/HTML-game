@@ -5,7 +5,7 @@ window.onload = prepareGame
 function prepareGame () {
   var tips = document.createElement('div')
   tips.className = 'text'
-  tips.innerHTML = '<div><p>Press ↑ to start game</p><p>and then control the flappy rectangle!</p><div>'
+  tips.innerHTML = '<div><p>点击灰色区域开始游戏</p><p>越过一个个障碍获取更高分</p><div>'
   document.body.appendChild(tips)
   window.addEventListener('keydown', function pressToStart (event) {
     if (event.keyCode === 38) {
@@ -13,6 +13,11 @@ function prepareGame () {
       startGame()
       window.removeEventListener('keydown', pressToStart)
     }
+  })
+  document.body.addEventListener('click', function clickToStart (event) {
+    tips.parentNode.removeChild(tips)
+    startGame()
+    document.body.removeEventListener('click', clickToStart)
   })
 }
 
@@ -25,8 +30,8 @@ function startGame () {
 var myGameArea = {
   canvas: document.createElement('canvas'),
   start: function () {
-    this.canvas.width = 480
-    this.canvas.height = 270
+    this.canvas.width = window.innerWidth
+    this.canvas.height = 0.5625 * window.innerWidth
     this.context = this.canvas.getContext('2d')
     document.body.insertBefore(this.canvas, document.body.firstChild)
     this.frameNo = 0
@@ -36,6 +41,13 @@ var myGameArea = {
       myGameArea.key = event.keyCode
     })
     window.addEventListener('keyup', function (event) {
+      myGameArea.key = false
+    })
+    document.body.addEventListener('touchstart', function (event) {
+      myGameArea.key = 38
+      event.stopPropagation()
+    })
+    document.body.addEventListener('touchend', function () {
       myGameArea.key = false
     })
   },
@@ -98,7 +110,7 @@ function updateGame () {
     myObstacles.splice(0, 2)
     myGameArea.score++
   };
-  if (myGameArea.frameNo === 1 || myGameArea.frameNo % 120 === 0) {
+  if (myGameArea.frameNo === 1 || myGameArea.frameNo % Math.floor(0.25 * window.innerWidth) === 0) {
     var x = myGameArea.canvas.width; var y = myGameArea.canvas.height
     var minCenter = 25
     var maxCenter = 245
@@ -124,7 +136,7 @@ function displayScore () {
   var ctx = myGameArea.context
   ctx.font = 'bold 20px Arial'
   ctx.fillStyle = 'black'
-  ctx.fillText('Score:' + myGameArea.score, 40, 250)
+  ctx.fillText('分数: ' + myGameArea.score, 40, 40)
 }
 
 function restart () {
@@ -144,15 +156,22 @@ function restart () {
   };
   var tips = document.createElement('div')
   tips.className = 'text'
-  tips.innerHTML = '<div><p>You failed!</p><p>Your score: ' + score + '</p><p>Your highest score: ' + high + '</p><p>Press ↑ to restart game</p><div>'
+  tips.innerHTML = '<div><p>你输了！</p><p>你的分数: ' + score + '</p><p>最高分数: ' + high + '</p><p>点击灰色区域重新开始</p><div>'
   document.body.appendChild(tips)
-  window.addEventListener('keydown', function reStart (event) {
+  window.addEventListener('keydown', function pressToRestart (event) {
     if (event.keyCode === 38) {
       tips.parentNode.removeChild(tips)
       myGamePiece = null
       myObstacles = []
       startGame()
-      window.removeEventListener('keydown', reStart)
+      window.removeEventListener('keydown', pressToRestart)
     }
+  })
+  document.body.addEventListener('click', function clickToRestart () {
+    tips.parentNode.removeChild(tips)
+    myGamePiece = null
+    myObstacles = []
+    startGame()
+    document.body.removeEventListener('click', clickToRestart)
   })
 }
