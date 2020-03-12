@@ -1,0 +1,101 @@
+body {
+  font-family: 'Helvetica','Arial',sans-serif;
+  text-align: center;
+}
+#container {
+  width: 332px;
+  height: 332px;
+  border: 2px solid black;
+  margin: auto;
+  position: relative;
+}
+#container .cell {
+  width: 80px;
+  height: 80px;
+  border: 2px solid black;
+  cursor: pointer;
+  float: left;
+  margin-left: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+}
+#print {
+  display: table;
+  width: 332px;
+  height: 332px;
+  z-index: 1;
+  color: white;
+  background-color: rgba(100,100,100,0.9);
+  position: absolute;
+}
+#print p {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 60px;
+  cursor: default;
+}
+#menu {
+  position: fixed;
+  left: -10px;
+  top: 140px;
+}
+#menu ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+}
+#menu ul li a {
+  display: block;
+  background-color: #dddddd;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-decoration: none;
+  text-align: right;
+  margin-top: 30px;
+  padding: 20px;
+  cursor: pointer;
+}
+#menu ul li a:hover {
+  background-color: #777;
+  color: white;
+  box-shadow: 3px 3px 5px #555;
+}
+#control {
+  display: inline-block;
+}
+#control div {
+  margin: 20px;
+  padding: 10px;
+  width: 100px;
+  height: 50px;
+  float: left;  /*或者写display: inline-block;*/
+  border: 1px solid black;
+  border-radius: 10px;
+  line-height: 50px;
+  font-size: 20px;
+  cursor: pointer;
+}
+#control div:hover {
+  background-color: #777;
+  color: white;
+  box-shadow: 3px 3px 5px #555;
+}
+
+@media screen and (max-width: 767px) {
+  h1 {
+    font-size: 26px;
+  }
+  #menu {
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+  #menu ul li {
+    display: inline-block;
+  }
+  #menu ul li a {
+    width: 80px;
+    text-align: center;
+    margin: 0 30px;
+  }
+}
